@@ -1,61 +1,79 @@
-let screen = document.querySelector("#screen");
+"use strict";
 
-function delete_entry() {
-  // screen.innerHTML.slice(0, -1);
+var screen = document.querySelector("#screen");
+
+function delete_entry() {// screen.innerHTML.slice(0, -1);
   // fix this
 }
+
 function ac() {
-  screen.innerHTML = ""
+  screen.innerHTML = "";
 }
+
 function add() {
-  screen.innerHTML += "+"
+  screen.innerHTML += "+";
 }
+
 function subtract() {
-  screen.innerHTML += "-"
+  screen.innerHTML += "-";
 }
+
 function divide() {
-  screen.innerHTML += "/"
+  screen.innerHTML += "/";
 }
+
 function multiply() {
-  screen.innerHTML += "*"
+  screen.innerHTML += "*";
 }
+
 function decimal_point() {
   // some kind of if statement needed here to stop 2 decimals being used. 
-  screen.innerHTML += "."
+  screen.innerHTML += ".";
 }
+
 function equals() {
-  screen.innerHTML += "=<br>"
+  screen.innerHTML += "=<br>";
   screen.contentWindow.location.reload(true);
 }
+
 function one() {
-  screen.innerHTML += "1"
+  screen.innerHTML += "1";
 }
+
 function two() {
-  screen.innerHTML += "2"
+  screen.innerHTML += "2";
 }
+
 function three() {
-  screen.innerHTML += "3"
+  screen.innerHTML += "3";
 }
+
 function four() {
-  screen.innerHTML += "4"
+  screen.innerHTML += "4";
 }
+
 function five() {
-  screen.innerHTML += "5"
+  screen.innerHTML += "5";
 }
+
 function six() {
-  screen.innerHTML += "6"
+  screen.innerHTML += "6";
 }
+
 function seven() {
-  screen.innerHTML += "7"
+  screen.innerHTML += "7";
 }
+
 function eight() {
-  screen.innerHTML += "8"
+  screen.innerHTML += "8";
 }
+
 function nine() {
-  screen.innerHTML += "9"
+  screen.innerHTML += "9";
 }
+
 function zero() {
-  screen.innerHTML += "0"
+  screen.innerHTML += "0";
 }
 
 document.querySelector("#delete").addEventListener("click", delete_entry);
@@ -76,6 +94,3 @@ document.querySelector("#seven").addEventListener("click", seven);
 document.querySelector("#eight").addEventListener("click", eight);
 document.querySelector("#nine").addEventListener("click", nine);
 document.querySelector("#zero").addEventListener("click", zero);
-
-
-

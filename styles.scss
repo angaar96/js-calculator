@@ -13,7 +13,12 @@ body {
   background: linear-gradient(90deg, rgba(2,0,36,0.15) 0%, rgba(9,9,121,0.15) 35%, rgba(0,212,255,0.15) 100%);  
   border: 1px solid black;
   border-radius: 15px; 
-  margin-bottom: 10px;   
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end; 
+  align-items: flex-end;
+  font-size: 50px; 
+  font-family: "Red Hat Display";    
 }
 
 #calculator {
@@ -75,7 +80,7 @@ body {
   grid-row: 5 / span 1; 
 }
 
-#decimal-point {
+#decimal_point {
   grid-column: 1 / span 1; 
-  grid-row: 5 / span 1; 
+  grid-row: 5 / 5; 
 }

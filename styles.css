@@ -15,6 +15,11 @@ body {
   border: 1px solid black;
   border-radius: 15px;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 50px;
+  font-family: "Red Hat Display";
 }
 
 #calculator {
@@ -76,7 +81,7 @@ body {
   grid-row: 5/span 1;
 }
 
-#decimal-point {
+#decimal_point {
   grid-column: 1/span 1;
-  grid-row: 5/span 1;
+  grid-row: 5/5;
 }
