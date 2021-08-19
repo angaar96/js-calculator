@@ -39,10 +39,10 @@ function subtract(event) {
 }
 
 function divide(event) {
-  var regex_equals = /[÷]/;
+  var regex_equals = /[/]/;
 
   if (!regex_equals.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML;
+    screen.innerHTML += "/";
   }
 }
 

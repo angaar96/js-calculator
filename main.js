@@ -38,9 +38,9 @@ function subtract(event) {
 }
 
 function divide(event) {
-  let regex_equals = /[÷]/
+  let regex_equals = /[/]/
   if (!regex_equals.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML
+    screen.innerHTML += "/"
   }
 }
 
