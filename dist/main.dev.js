@@ -2,7 +2,6 @@
 
 var screen = document.querySelector("#screen");
 var screenOutput = document.querySelector("#screen_output"); // Special Button Functionality - Functions
-// If statement used here to stop 2 operators being used in succession. 
 
 function equals(event) {
   screenOutput.innerText = "";
@@ -11,11 +10,7 @@ function equals(event) {
 }
 
 function decimal_point(event) {
-  var regex_decimal = /[.]/;
-
-  if (!regex_decimal.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML;
-  }
+  screen.innerHTML += event.target.innerHTML;
 }
 
 function delete_entry() {
@@ -23,43 +18,29 @@ function delete_entry() {
 }
 
 function add(event) {
-  var regex_equals = /[+]/;
-
-  if (!regex_equals.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML;
-  }
+  screen.innerHTML += event.target.innerHTML;
 }
 
 function subtract(event) {
-  var regex_equals = /[-]/;
-
-  if (!regex_equals.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML;
-  }
+  screen.innerHTML += event.target.innerHTML;
 }
 
 function divide(event) {
-  var regex_equals = /[/]/;
-
-  if (!regex_equals.test(screen.innerHTML)) {
-    screen.innerHTML += "/";
-  }
+  screen.innerHTML += "/";
 }
 
 function multiply(event) {
-  var regex_equals = /[*]/;
+  screen.innerHTML += event.target.innerHTML;
+}
 
-  if (!regex_equals.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML;
-  }
+function acbutton() {
+  screen.innerHTML = "";
+  screenOutput.innerHTML = "";
 } // Special Button Functionality - Event Listeners 
 
 
 var acButton = document.querySelector("#ac");
-acButton.addEventListener("click", function () {
-  screen.innerHTML = "";
-  screenOutput.innerHTML = "";
-});
+acButton.addEventListener("click", acbutton);
 var decimalButton = document.querySelector("#decimal_point");
 decimalButton.addEventListener("click", decimal_point);
 var equalsButton = document.querySelector("#equals");

@@ -51,7 +51,7 @@ body {
 
 .buttons {
   font-size: 50px;
-  font-family: Helvetica, sans-serif;
+  font-family: "Red Hat Display", sans-serif;
   box-shadow: inset 0px 1px 0px 0px #bbdaf7;
   background: #020024;
   border-radius: 6px;
@@ -60,11 +60,11 @@ body {
 
 .special_buttons {
   font-size: 50px;
-  font-family: Helvetica, sans-serif;
+  font-family: "Red Hat Display", sans-serif;
   box-shadow: inset 0px 1px 0px 0px #bbdaf7;
   background: #020024;
   border-radius: 6px;
-  color: white;
+  color: #B22222;
 }
 
 .buttons:hover {
@@ -100,6 +100,8 @@ body {
 #equals {
   grid-column: 3/span 2;
   grid-row: 5/span 1;
+  background-color: #006400;
+  color: white;
 }
 
 #decimal_point {
