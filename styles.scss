@@ -23,7 +23,10 @@ body {
 
 #calculator {
   display: flex; 
-  flex-direction: column;   
+  flex-direction: column;
+  padding: 10px; 
+  border: 5px solid black;
+  border-radius: 15px;      
 }
 
 #buttons {
@@ -36,6 +39,15 @@ body {
   height: 60vh;    
 }
 .buttons {
+  font-size: 50px; 
+  font-family: Helvetica, sans-serif;  
+  box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+	background: rgb(2,0,36);
+	border-radius: 6px;
+  color: white; 
+}
+
+.special_buttons {
   font-size: 50px; 
   font-family: Helvetica, sans-serif;  
   box-shadow: inset 0px 1px 0px 0px #bbdaf7;
@@ -83,4 +95,10 @@ body {
 #decimal_point {
   grid-column: 1 / span 1; 
   grid-row: 5 / 5; 
+}
+
+// for use with button 
+
+.pressed {
+  transform: matrix(0.95, 0, 0, 0.95, 0, 0);
 }

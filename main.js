@@ -1,81 +1,98 @@
 let screen = document.querySelector("#screen");
 
+
+// Special Button Functionality - Functions
+
+// If statement used here to stop 2 operators being used in succession. 
+
+function equals(event) {
+  let regex_equals = /[=]/
+  if (!regex_equals.test(screen.innerHTML)) {
+    screen.innerHTML += event.target.innerHTML
+  }
+}
+
+function decimal_point(event) {
+  let regex_decimal = /[.]/
+  if (!regex_decimal.test(screen.innerHTML)) {
+    screen.innerHTML += event.target.innerHTML
+  }
+} 
+
 function delete_entry() {
   // screen.innerHTML.slice(0, -1);
   // fix this
 }
-function ac() {
-  screen.innerHTML = ""
-}
-function add() {
-  screen.innerHTML += "+"
-}
-function subtract() {
-  screen.innerHTML += "-"
-}
-function divide() {
-  screen.innerHTML += "/"
-}
-function multiply() {
-  screen.innerHTML += "*"
-}
-function decimal_point() {
-  // some kind of if statement needed here to stop 2 decimals being used. 
-  screen.innerHTML += "."
-}
-function equals() {
-  screen.innerHTML += "=<br>"
-  screen.contentWindow.location.reload(true);
-}
-function one() {
-  screen.innerHTML += "1"
-}
-function two() {
-  screen.innerHTML += "2"
-}
-function three() {
-  screen.innerHTML += "3"
-}
-function four() {
-  screen.innerHTML += "4"
-}
-function five() {
-  screen.innerHTML += "5"
-}
-function six() {
-  screen.innerHTML += "6"
-}
-function seven() {
-  screen.innerHTML += "7"
-}
-function eight() {
-  screen.innerHTML += "8"
-}
-function nine() {
-  screen.innerHTML += "9"
-}
-function zero() {
-  screen.innerHTML += "0"
+
+function add(event) {
+  let regex_equals = /[+]/
+  if (!regex_equals.test(screen.innerHTML)) {
+    screen.innerHTML += event.target.innerHTML
+  }
 }
 
-document.querySelector("#delete").addEventListener("click", delete_entry);
-document.querySelector("#ac").addEventListener("click", ac);
-document.querySelector("#add").addEventListener("click", add);
-document.querySelector("#subtract").addEventListener("click", subtract);
-document.querySelector("#divide").addEventListener("click", divide);
-document.querySelector("#multiply").addEventListener("click", multiply);
-document.querySelector("#decimal_point").addEventListener("click", decimal_point);
-document.querySelector("#equals").addEventListener("click", equals);
-document.querySelector("#one").addEventListener("click", one);
-document.querySelector("#two").addEventListener("click", two);
-document.querySelector("#three").addEventListener("click", three);
-document.querySelector("#four").addEventListener("click", four);
-document.querySelector("#five").addEventListener("click", five);
-document.querySelector("#six").addEventListener("click", six);
-document.querySelector("#seven").addEventListener("click", seven);
-document.querySelector("#eight").addEventListener("click", eight);
-document.querySelector("#nine").addEventListener("click", nine);
-document.querySelector("#zero").addEventListener("click", zero);
+function subtract(event) {
+  let regex_equals = /[-]/
+  if (!regex_equals.test(screen.innerHTML)) {
+    screen.innerHTML += event.target.innerHTML;
+  }
+}
 
+function divide(event) {
+  let regex_equals = /[÷]/
+  if (!regex_equals.test(screen.innerHTML)) {
+    screen.innerHTML += event.target.innerHTML
+  }
+}
+
+function multiply(event) {
+  let regex_equals = /[*]/
+  if (!regex_equals.test(screen.innerHTML)) {
+    screen.innerHTML += event.target.innerHTML
+  }
+}
+// Special Button Functionality - Event Listeners 
+
+let acButton = document.querySelector("#ac")
+acButton.addEventListener("click", () => {screen.innerHTML = ""} ) 
+let decimalButton = document.querySelector("#decimal-point"); 
+decimalButton.addEventListener("click", decimal_point)
+let equalsButton = document.querySelector("#equals"); 
+equalsButton.addEventListener("click", equals);
+let deleteButton = document.querySelector("#delete");
+deleteButton.addEventListener("click", delete_entry);
+let addButton = document.querySelector("#add");
+addButton.addEventListener("click", add);
+let subtractButton = document.querySelector("#subtract");
+subtractButton.addEventListener("click", subtract);
+let divideButton = document.querySelector("#divide");
+divideButton.addEventListener("click", divide);
+let multiplyButton = document.querySelector("#multiply");
+multiplyButton.addEventListener("click", multiply);
+
+
+
+// Basic Button Functionality and pressing animation 
+
+let allButtons = document.querySelectorAll(".buttons");
+let allNumbers = document.querySelectorAll(".numbers")
+
+function buttonPress(event) {
+  event.target.classList.add("pressed")
+  }
+function buttonUnpress(event) {
+  event.target.classList.remove("pressed")
+}
+
+allNumbers.forEach(number => {
+  number.addEventListener("click", (event) => {
+    screen.innerHTML += event.target.innerHTML
+  })
+})
+
+allButtons.forEach(button => {
+  button.addEventListener("mousedown", buttonPress)
+  button.addEventListener("mouseup", buttonUnpress)
+})
 
 
