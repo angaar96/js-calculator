@@ -8,17 +8,24 @@ body {
   justify-content: center; 
   align-items: center; 
 }
-#screen { 
+#screen-container { 
   height: 150px;
   background: linear-gradient(90deg, rgba(2,0,36,0.15) 0%, rgba(9,9,121,0.15) 35%, rgba(0,212,255,0.15) 100%);  
   border: 1px solid black;
   border-radius: 15px; 
   margin-bottom: 10px;
   display: flex;
-  justify-content: flex-end; 
+  flex-direction: column; 
+  justify-content: space-between; 
   align-items: flex-end;
-  font-size: 50px; 
+  font-size: 40px; 
   font-family: "Red Hat Display";    
+}
+#screen {
+  height: 50%; 
+}
+#screen_output {
+  height: 50%; 
 }
 
 #calculator {

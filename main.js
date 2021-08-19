@@ -1,4 +1,5 @@
 let screen = document.querySelector("#screen");
+let screenOutput = document.querySelector("#screen_output");
 
 
 // Special Button Functionality - Functions
@@ -7,8 +8,8 @@ let screen = document.querySelector("#screen");
 
 function equals(event) {
   let regex_equals = /[=]/
-  if (!regex_equals.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML
+  if (!regex_equals.test(screenOutput.innerHTML)) {
+    screenOutput.innerHTML += event.target.innerHTML
   }
 }
 
@@ -20,8 +21,7 @@ function decimal_point(event) {
 } 
 
 function delete_entry() {
-  // screen.innerHTML.slice(0, -1);
-  // fix this
+  screen.innerHTML = screen.innerText.slice(0, -1);
 }
 
 function add(event) {
@@ -54,8 +54,11 @@ function multiply(event) {
 // Special Button Functionality - Event Listeners 
 
 let acButton = document.querySelector("#ac")
-acButton.addEventListener("click", () => {screen.innerHTML = ""} ) 
-let decimalButton = document.querySelector("#decimal-point"); 
+acButton.addEventListener("click", () => {
+  screen.innerHTML = ""
+  screenOutput.innerHTML = ""
+} ) 
+let decimalButton = document.querySelector("#decimal_point"); 
 decimalButton.addEventListener("click", decimal_point)
 let equalsButton = document.querySelector("#equals"); 
 equalsButton.addEventListener("click", equals);
