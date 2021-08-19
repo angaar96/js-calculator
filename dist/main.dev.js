@@ -5,11 +5,9 @@ var screenOutput = document.querySelector("#screen_output"); // Special Button F
 // If statement used here to stop 2 operators being used in succession. 
 
 function equals(event) {
-  var regex_equals = /[=]/;
-
-  if (!regex_equals.test(screenOutput.innerHTML)) {
-    screenOutput.innerHTML += event.target.innerHTML;
-  }
+  screenOutput.innerText = "";
+  var calculation = eval(screen.innerText);
+  screenOutput.innerText += " = ".concat(calculation.toString());
 }
 
 function decimal_point(event) {

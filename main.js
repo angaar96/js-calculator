@@ -7,10 +7,9 @@ let screenOutput = document.querySelector("#screen_output");
 // If statement used here to stop 2 operators being used in succession. 
 
 function equals(event) {
-  let regex_equals = /[=]/
-  if (!regex_equals.test(screenOutput.innerHTML)) {
-    screenOutput.innerHTML += event.target.innerHTML
-  }
+  screenOutput.innerText = ""; 
+  let calculation = eval(screen.innerText);
+  screenOutput.innerText += ` = ${calculation.toString()}`
 }
 
 function decimal_point(event) {
