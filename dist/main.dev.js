@@ -1,41 +1,55 @@
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 var screen = document.querySelector("#screen");
 var screenOutput = document.querySelector("#screen_output"); // Special Button Functionality - Functions
 
 function calculate() {
-  'use strict';
-
   var calc_answer;
   var regex_operators = /[+-/*]/;
-  var numberArray = screen.innerText.split(/[+-/*]/);
-  var whichOperatorData = screen.innerText.match(/[+-/*]/);
+  var numberArray = screen.innerText.split(/[+\-/*]/);
+
+  var floatArray = _toConsumableArray(numberArray).map(function (number) {
+    return parseFloat(number);
+  });
+
+  console.log(floatArray);
+  var whichOperatorData = screen.innerText.match(/[+\-/*]/);
+  console.log(whichOperatorData);
   var whichOperator = whichOperatorData[0];
 
   switch (whichOperator) {
     case "+":
-      calc_answer = numberArray[0] + numberArray[1];
+      calc_answer = floatArray[0] + floatArray[1];
       break;
 
     case "-":
-      calc_answer = numberArray[0] - numberArray[1];
+      calc_answer = floatArray[0] - floatArray[1];
       break;
 
     case "*":
-      calc_answer = numberArray[0] * numberArray[1];
+      calc_answer = floatArray[0] * floatArray[1];
       break;
 
     case "/":
-      calc_answer = numberArray[0] / numberArray[1];
+      calc_answer = floatArray[0] / floatArray[1];
       break;
   }
 
+  console.log(calc_answer);
   return calc_answer;
 }
 
 function equals(event) {
   screenOutput.innerText = "";
-  screenOutput.innerText += calculate().toString();
+  screenOutput.innerText += "= ".concat(calculate());
 }
 
 function decimal_point(event) {

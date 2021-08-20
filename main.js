@@ -4,32 +4,37 @@ let screenOutput = document.querySelector("#screen_output");
 
 // Special Button Functionality - Functions
 function calculate() {
-  'use strict';
   let calc_answer; 
   let regex_operators = /[+-/*]/;
-  let numberArray = screen.innerText.split(/[+-/*]/); 
-  let whichOperatorData = screen.innerText.match(/[+-/*]/);
+  let numberArray = screen.innerText.split(/[+\-/*]/);
+  let floatArray = [...numberArray].map(number => {
+    return parseFloat(number); 
+  }); 
+  console.log(floatArray);
+  let whichOperatorData = screen.innerText.match(/[+\-/*]/);
+  console.log(whichOperatorData)
   let whichOperator = whichOperatorData[0];
   switch (whichOperator) {
     case "+": 
-      calc_answer = numberArray[0] + numberArray[1];
+      calc_answer = floatArray[0] + floatArray[1];
       break; 
     case "-": 
-    calc_answer = numberArray[0] - numberArray[1];
+    calc_answer = floatArray[0] - floatArray[1];
     break;
     case "*": 
-      calc_answer = numberArray[0] * numberArray[1];
+      calc_answer = floatArray[0] * floatArray[1];
       break;
     case "/": 
-      calc_answer = numberArray[0] / numberArray[1];
+      calc_answer = floatArray[0] / floatArray[1];
       break;
   }
+  console.log(calc_answer)
   return calc_answer;
 }
 
 function equals(event) {
   screenOutput.innerText = ""; 
-  screenOutput.innerText += calculate().toString();
+  screenOutput.innerText += `= ${calculate()}`;
 }
 
 function decimal_point(event) {
