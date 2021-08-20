@@ -8,20 +8,20 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-var screen = document.querySelector("#screen");
+var screenInput = document.querySelector("#screen_input");
 var screenOutput = document.querySelector("#screen_output"); // Special Button Functionality - Functions
 
 function calculate() {
   var calc_answer;
   var regex_operators = /[+-/*]/;
-  var numberArray = screen.innerText.split(/[+\-/*]/);
+  var numberArray = screenInput.innerText.split(/[+\-/*]/);
 
   var floatArray = _toConsumableArray(numberArray).map(function (number) {
     return parseFloat(number);
   });
 
   console.log(floatArray);
-  var whichOperatorData = screen.innerText.match(/[+\-/*]/);
+  var whichOperatorData = screenInput.innerText.match(/[+\-/*]/);
   console.log(whichOperatorData);
   var whichOperator = whichOperatorData[0];
 
@@ -53,47 +53,47 @@ function equals(event) {
 }
 
 function decimal_point(event) {
-  screen.innerHTML += event.target.innerHTML;
+  screenInput.innerHTML += event.target.innerHTML;
 }
 
 function delete_entry() {
-  screen.innerHTML = screen.innerText.slice(0, -1);
+  screenInput.innerHTML = screenInput.innerText.slice(0, -1);
 }
 
 function add(event) {
   var regex_add = /[+]/;
 
-  if (!regex_add.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML;
+  if (!regex_add.test(screenInput.innerHTML)) {
+    screenInput.innerHTML += event.target.innerHTML;
   }
 }
 
 function subtract(event) {
   var regex_subtract = /[-]/;
 
-  if (!regex_subtract.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML;
+  if (!regex_subtract.test(screenInput.innerHTML)) {
+    screenInput.innerHTML += event.target.innerHTML;
   }
 }
 
 function divide(event) {
   var regex_divide = /[/]/;
 
-  if (!regex_divide.test(screen.innerHTML)) {
-    screen.innerHTML += "/";
+  if (!regex_divide.test(screenInput.innerHTML)) {
+    screenInput.innerHTML += "/";
   }
 }
 
 function multiply(event) {
   var regex_multiply = /[*]/;
 
-  if (!regex_multiply.test(screen.innerHTML)) {
-    screen.innerHTML += "*";
+  if (!regex_multiply.test(screenInput.innerHTML)) {
+    screenInput.innerHTML += "*";
   }
 }
 
 function acbutton() {
-  screen.innerHTML = "";
+  screenInput.innerHTML = "";
   screenOutput.innerHTML = "";
 } // Special Button Functionality - Event Listeners 
 
@@ -128,7 +128,7 @@ function buttonUnpress(event) {
 
 allNumbers.forEach(function (number) {
   number.addEventListener("click", function (event) {
-    screen.innerHTML += event.target.innerHTML;
+    screenInput.innerHTML += event.target.innerHTML;
   });
 });
 allButtons.forEach(function (button) {

@@ -1,4 +1,4 @@
-let screen = document.querySelector("#screen");
+let screenInput = document.querySelector("#screen_input");
 let screenOutput = document.querySelector("#screen_output");
 
 
@@ -7,12 +7,12 @@ let screenOutput = document.querySelector("#screen_output");
 function calculate() {
   let calc_answer; 
   let regex_operators = /[+-/*]/;
-  let numberArray = screen.innerText.split(/[+\-/*]/);
+  let numberArray = screenInput.innerText.split(/[+\-/*]/);
   let floatArray = [...numberArray].map(number => {
     return parseFloat(number); 
   }); 
   console.log(floatArray);
-  let whichOperatorData = screen.innerText.match(/[+\-/*]/);
+  let whichOperatorData = screenInput.innerText.match(/[+\-/*]/);
   console.log(whichOperatorData)
   let whichOperator = whichOperatorData[0];
   switch (whichOperator) {
@@ -39,43 +39,43 @@ function equals(event) {
 }
 
 function decimal_point(event) {
-  screen.innerHTML += event.target.innerHTML
+  screenInput.innerHTML += event.target.innerHTML
   }
 
 function delete_entry() {
-  screen.innerHTML = screen.innerText.slice(0, -1);
+  screenInput.innerHTML = screenInput.innerText.slice(0, -1);
 }
 
 function add(event) {
   let regex_add = /[+]/;
-  if (!regex_add.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML;
+  if (!regex_add.test(screenInput.innerHTML)) {
+    screenInput.innerHTML += event.target.innerHTML;
   }
 }
 
 function subtract(event) {
   let regex_subtract = /[-]/;
-  if (!regex_subtract.test(screen.innerHTML)) {
-    screen.innerHTML += event.target.innerHTML;
+  if (!regex_subtract.test(screenInput.innerHTML)) {
+    screenInput.innerHTML += event.target.innerHTML;
   }
 }
 
 function divide(event) {
   var regex_divide = /[/]/;
-  if (!regex_divide.test(screen.innerHTML)) {
-    screen.innerHTML += "/";
+  if (!regex_divide.test(screenInput.innerHTML)) {
+    screenInput.innerHTML += "/";
   }
 }
 
 function multiply(event) {
   let regex_multiply = /[*]/;
-  if (!regex_multiply.test(screen.innerHTML)) {
-    screen.innerHTML += "*";
+  if (!regex_multiply.test(screenInput.innerHTML)) {
+    screenInput.innerHTML += "*";
   }
   }
 
 function acbutton() {
-  screen.innerHTML = ""
+  screenInput.innerHTML = ""
   screenOutput.innerHTML = ""
 }
 // Special Button Functionality - Event Listeners 
@@ -113,7 +113,7 @@ function buttonUnpress(event) {
 
 allNumbers.forEach(number => {
   number.addEventListener("click", (event) => {
-    screen.innerHTML += event.target.innerHTML
+    screenInput.innerHTML += event.target.innerHTML
   })
 })
 
