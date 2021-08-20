@@ -20,15 +20,17 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   font-size: 40px;
-  font-family: "Red Hat Display";
+  font-family: "Courier New";
 }
 
 #screen {
   height: 50%;
+  color: white;
 }
 
 #screen_output {
   height: 50%;
+  color: white;
 }
 
 #calculator {
