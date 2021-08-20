@@ -3,6 +3,7 @@ let screenOutput = document.querySelector("#screen_output");
 
 
 // Special Button Functionality - Functions
+
 function calculate() {
   let calc_answer; 
   let regex_operators = /[+-/*]/;
@@ -19,8 +20,8 @@ function calculate() {
       calc_answer = floatArray[0] + floatArray[1];
       break; 
     case "-": 
-    calc_answer = floatArray[0] - floatArray[1];
-    break;
+      calc_answer = floatArray[0] - floatArray[1];
+      break;
     case "*": 
       calc_answer = floatArray[0] * floatArray[1];
       break;
