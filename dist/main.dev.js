@@ -11,7 +11,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var screenInput = document.querySelector("#screen_input");
 var screenOutput = document.querySelector("#screen_output"); // Special Button Functionality - Functions
 
-function calculate() {
+function calculateAnswer() {
   var calc_answer;
   var regex_operators = /[+-/*]/;
   var numberArray = screenInput.innerText.split(/[+\-/*]/);
@@ -20,9 +20,7 @@ function calculate() {
     return parseFloat(number);
   });
 
-  console.log(floatArray);
   var whichOperatorData = screenInput.innerText.match(/[+\-/*]/);
-  console.log(whichOperatorData);
   var whichOperator = whichOperatorData[0];
 
   switch (whichOperator) {
@@ -43,77 +41,52 @@ function calculate() {
       break;
   }
 
-  console.log(calc_answer);
   return calc_answer;
 }
 
-function equals(event) {
+function handleEquals(event) {
   screenOutput.innerText = "";
-  screenOutput.innerText += "= ".concat(calculate());
+  screenOutput.innerText += "= ".concat(calculateAnswer());
 }
 
-function decimal_point(event) {
+function handleDecimalInput(event) {
   screenInput.innerHTML += event.target.innerHTML;
 }
 
-function delete_entry() {
+function handleDelete() {
   screenInput.innerHTML = screenInput.innerText.slice(0, -1);
 }
 
-function add(event) {
-  var regex_add = /[+]/;
-
-  if (!regex_add.test(screenInput.innerHTML)) {
-    screenInput.innerHTML += event.target.innerHTML;
-  }
+function handleOperation(event) {
+  screenInput.innerHTML += event.target.innerHTML;
 }
 
-function subtract(event) {
-  var regex_subtract = /[-]/;
-
-  if (!regex_subtract.test(screenInput.innerHTML)) {
-    screenInput.innerHTML += event.target.innerHTML;
-  }
+function handleDivide(event) {
+  screenInput.innerHTML += "/";
 }
 
-function divide(event) {
-  var regex_divide = /[/]/;
-
-  if (!regex_divide.test(screenInput.innerHTML)) {
-    screenInput.innerHTML += "/";
-  }
-}
-
-function multiply(event) {
-  var regex_multiply = /[*]/;
-
-  if (!regex_multiply.test(screenInput.innerHTML)) {
-    screenInput.innerHTML += "*";
-  }
-}
-
-function acbutton() {
+function handleAc() {
   screenInput.innerHTML = "";
   screenOutput.innerHTML = "";
 } // Special Button Functionality - Event Listeners 
 
 
 var acButton = document.querySelector("#ac");
-acButton.addEventListener("click", acbutton);
-var decimalButton = document.querySelector("#decimal_point");
-decimalButton.addEventListener("click", decimal_point);
+acButton.addEventListener("click", handleAc);
+var decimalButton = document.querySelector("#decimalPoint");
+decimalButton.addEventListener("click", handleDecimalInput);
 var equalsButton = document.querySelector("#equals");
-equalsButton.addEventListener("click", equals);
+equalsButton.addEventListener("click", handleEquals);
 var deleteButton = document.querySelector("#delete");
-deleteButton.addEventListener("click", delete_entry);
+deleteButton.addEventListener("click", handleDelete);
 var addButton = document.querySelector("#add");
-addButton.addEventListener("click", add);
+addButton.addEventListener("click", handleOperation);
 var subtractButton = document.querySelector("#subtract");
-subtractButton.addEventListener("click", subtract);
+subtractButton.addEventListener("click", handleOperation);
 var divideButton = document.querySelector("#divide");
-divideButton.addEventListener("click", divide);
+divideButton.addEventListener("click", handleDivide);
 var multiplyButton = document.querySelector("#multiply");
-multiplyButton.addEventListener("click", multiply); // Basic Button Functionality and pressing animation 
+multiplyButton.addEventListener("click", handleOperation); // Basic Button Functionality and pressing animation 
 
 var allButtons = document.querySelectorAll(".buttons");
 var allNumbers = document.querySelectorAll(".numbers");
