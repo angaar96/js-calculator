@@ -29,7 +29,13 @@ function calculateAnswer() {
         break;
   }
 }
-  return answer;
+// If the number is recurring, then round it. 
+  regexRecurring = /(\d)\1+/ 
+  if (regexRecurring.test(answer)) {
+    return answer.toFixed(1) + " (Recurring)";
+  } else {
+    return answer;
+  }
 } 
 
 function handleEquals(event) {

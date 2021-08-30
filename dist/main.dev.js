@@ -41,9 +41,16 @@ function calculateAnswer() {
         answer /= floatArray[i + 1];
         break;
     }
-  }
+  } // If the number is recurring, then round it. 
 
-  return answer;
+
+  regexRecurring = /(\d)\1+/;
+
+  if (regexRecurring.test(answer)) {
+    return answer.toFixed(1) + " (Recurring)";
+  } else {
+    return answer;
+  }
 }
 
 function handleEquals(event) {
