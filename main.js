@@ -1,34 +1,36 @@
-let screenInput = document.querySelector("#screen_input");
-let screenOutput = document.querySelector("#screen_output");
+let screenInput = document.querySelector("#screenInput");
+let screenOutput = document.querySelector("#screenOutput");
 
 
 // Special Button Functionality - Functions
 
-function calculateAnswer() {
-  let calc_answer; 
-  let regex_operators = /[+-/*]/;
+function calculateAnswer() { 
+  let regex_operators = /[+/*-]/g;
   let numberArray = screenInput.innerText.split(/[+\-/*]/);
   let floatArray = [...numberArray].map(number => {
     return parseFloat(number); 
   }); 
-  let whichOperatorData = screenInput.innerText.match(/[+\-/*]/);
-  let whichOperator = whichOperatorData[0];
-  switch (whichOperator) {
-    case "+": 
-      calc_answer = floatArray[0] + floatArray[1];
-      break; 
-    case "-": 
-      calc_answer = floatArray[0] - floatArray[1];
-      break;
-    case "*": 
-      calc_answer = floatArray[0] * floatArray[1];
-      break;
-    case "/": 
-      calc_answer = floatArray[0] / floatArray[1];
-      break;
+  let whichOperatorData = screenInput.innerText.match(/[+\-/*]/g);
+  // First switch handles the first operation with the first two numbers.
+  let answer = floatArray[0];
+  for (let i=0; i<floatArray.length; i++) {
+    switch (whichOperatorData[i]) {
+      case "+": 
+        answer += floatArray[i+1];
+        break; 
+      case "-": 
+        answer -= floatArray[i+1];
+        break;
+      case "*": 
+        answer *= floatArray[i+1];
+        break;
+      case "/": 
+        answer /= floatArray[i+1];
+        break;
   }
-  return calc_answer;
 }
+  return answer;
+} 
 
 function handleEquals(event) {
   screenOutput.innerText = ""; 
@@ -98,5 +100,3 @@ allButtons.forEach(button => {
   button.addEventListener("mousedown", buttonPress)
   button.addEventListener("mouseup", buttonUnpress)
 })
-
-

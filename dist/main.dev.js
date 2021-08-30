@@ -8,40 +8,42 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-var screenInput = document.querySelector("#screen_input");
-var screenOutput = document.querySelector("#screen_output"); // Special Button Functionality - Functions
+var screenInput = document.querySelector("#screenInput");
+var screenOutput = document.querySelector("#screenOutput"); // Special Button Functionality - Functions
 
 function calculateAnswer() {
-  var calc_answer;
-  var regex_operators = /[+-/*]/;
+  var regex_operators = /[+/*-]/g;
   var numberArray = screenInput.innerText.split(/[+\-/*]/);
 
   var floatArray = _toConsumableArray(numberArray).map(function (number) {
     return parseFloat(number);
   });
 
-  var whichOperatorData = screenInput.innerText.match(/[+\-/*]/);
-  var whichOperator = whichOperatorData[0];
+  var whichOperatorData = screenInput.innerText.match(/[+\-/*]/g); // First switch handles the first operation with the first two numbers.
 
-  switch (whichOperator) {
-    case "+":
-      calc_answer = floatArray[0] + floatArray[1];
-      break;
+  var answer = floatArray[0];
 
-    case "-":
-      calc_answer = floatArray[0] - floatArray[1];
-      break;
+  for (var i = 0; i < floatArray.length; i++) {
+    switch (whichOperatorData[i]) {
+      case "+":
+        answer += floatArray[i + 1];
+        break;
 
-    case "*":
-      calc_answer = floatArray[0] * floatArray[1];
-      break;
+      case "-":
+        answer -= floatArray[i + 1];
+        break;
 
-    case "/":
-      calc_answer = floatArray[0] / floatArray[1];
-      break;
+      case "*":
+        answer *= floatArray[i + 1];
+        break;
+
+      case "/":
+        answer /= floatArray[i + 1];
+        break;
+    }
   }
 
-  return calc_answer;
+  return answer;
 }
 
 function handleEquals(event) {

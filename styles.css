@@ -15,7 +15,7 @@ body {
   align-items: center;
 }
 
-#screen-container {
+#screenContainer {
   height: 150px;
   background: linear-gradient(90deg, rgba(2, 0, 36, 0.15) 0%, rgba(9, 9, 121, 0.15) 35%, rgba(0, 212, 255, 0.15) 100%);
   border: 1px solid black;
@@ -29,12 +29,7 @@ body {
   font-family: "Courier New";
 }
 
-#screen_input {
-  height: 50%;
-  color: white;
-}
-
-#screen_output {
+#screenInput, #screenOutput {
   height: 50%;
   color: white;
 }

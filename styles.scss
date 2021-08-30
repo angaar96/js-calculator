@@ -14,7 +14,7 @@ body {
   justify-content: center; 
   align-items: center;  
 }
-#screen-container { 
+#screenContainer { 
   height: 150px;
   background: linear-gradient(90deg, rgba(2,0,36,0.15) 0%, rgba(9,9,121,0.15) 35%, rgba(0,212,255,0.15) 100%);  
   border: 1px solid black;
@@ -27,13 +27,9 @@ body {
   font-size: 40px; 
   font-family: "Courier New";
 }
-#screen_input {
+#screenInput, #screenOutput {
   height: 50%; 
   color: white; 
-}
-#screen_output {
-  height: 50%;
-  color: white;  
 }
 
 #calculator {
@@ -42,7 +38,6 @@ body {
   padding: 10px; 
   border: 5px solid black;
   border-radius: 15px;
-  // box-shadow: 10px 5px 5px #344F83; 
   background: linear-gradient(#647AAF, #092659);
   width: 30vw; 
   height: 70vh; 
