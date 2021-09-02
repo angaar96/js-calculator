@@ -44,7 +44,7 @@ function calculateAnswer() {
   } // If the number is recurring, then round it. 
 
 
-  regexRecurring = /(\d)\2+/;
+  regexRecurring = /\.(\d)\1+/;
 
   if (regexRecurring.test(answer)) {
     return answer.toFixed(1) + " (Recurring)";
