@@ -1,44 +1,71 @@
 "use strict";
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 var screenInput = document.querySelector("#screenInput");
 var screenOutput = document.querySelector("#screenOutput"); // Special Button Functionality - Functions
 
 function calculateAnswer() {
-  var regex_operators = /[+/*-]/g;
-  var numberArray = screenInput.innerText.split(/[+\-/*]/);
-
-  var floatArray = _toConsumableArray(numberArray).map(function (number) {
+  console.log(screenInput.innerText);
+  screenInputArray = screenInput.innerText.split(/[n+\-/*]/);
+  console.log(screenInputArray.indexOf(''));
+  screenInput.innerText.match(/[n]/) ? screenInputArray[screenInputArray.indexOf('')] = "n" : console.log("no negative numbers");
+  console.log(screenInputArray);
+  var newNumberArray = screenInputArray.filter(function (i) {
+    return !i.match(/[+\-/*]/);
+  });
+  console.log(newNumberArray);
+  var floatArray = newNumberArray.filter(function (i) {
+    return i.match(/[\d]/);
+  });
+  console.log(floatArray);
+  var floatNumbersOnly = floatArray.map(function (number) {
     return parseFloat(number);
   });
+  console.log(floatNumbersOnly);
+  var whichOperatorData = screenInput.innerText.match(/[+\-/*]/g);
+  console.log(whichOperatorData);
+  var answer = newNumberArray[0] === "n" ? -1 * floatNumbersOnly[0] : floatNumbersOnly[0]; // for 1 * 3
+  // first element is not n so answer = 1 
+  // new numbers array = ["1", "3"]
+  // float array = ["1", "3"]
+  // which operators array = [*]
+  // its a multiply, so it checks next element and its not n, therefore 
 
-  var whichOperatorData = screenInput.innerText.match(/[+\-/*]/g); // First switch handles the first operation with the first two numbers.
-
-  var answer = floatArray[0];
-
-  for (var i = 0; i < floatArray.length; i++) {
+  for (var i = 0; i <= whichOperatorData.length - 1; i++) {
     switch (whichOperatorData[i]) {
       case "+":
-        answer += floatArray[i + 1];
+        if (newNumberArray[i + 1] == "n") {
+          answer -= floatNumbersOnly[i + 1];
+        } else {
+          answer += floatNumbersOnly[i + 1];
+        }
+
         break;
 
       case "-":
-        answer -= floatArray[i + 1];
+        if (newNumberArray[i + 1] == "n") {
+          answer += floatNumbersOnly[i + 1];
+        } else {
+          answer -= floatNumbersOnly[i + 1];
+        }
+
         break;
 
       case "*":
-        answer *= floatArray[i + 1];
+        if (newNumberArray[i + 1] == "n") {
+          answer *= -1 * floatNumbersOnly[i + 1];
+        } else {
+          answer *= floatNumbersOnly[i + 1];
+        }
+
         break;
 
       case "/":
-        answer /= floatArray[i + 1];
+        if (newNumberArray[i + 1] == "n") {
+          answer /= floatNumbersOnly[i + 1] * -1;
+        } else {
+          answer /= floatNumbersOnly[i + 1];
+        }
+
         break;
     }
   } // If the number is recurring, then round it. 
@@ -57,6 +84,10 @@ function handleEquals(event) {
   screenOutput.innerText = "";
   screenOutput.innerText += "= ".concat(calculateAnswer());
   screenOutput.value = calculateAnswer().toString();
+}
+
+function handleNegativeNumber() {
+  screenInput.innerHTML += "n";
 }
 
 function handleDecimalInput(event) {
@@ -96,7 +127,9 @@ subtractButton.addEventListener("click", handleOperation);
 var divideButton = document.querySelector("#divide");
 divideButton.addEventListener("click", handleDivide);
 var multiplyButton = document.querySelector("#multiply");
-multiplyButton.addEventListener("click", handleOperation); // Basic Button Functionality and pressing animation 
+multiplyButton.addEventListener("click", handleOperation);
+var negativeNumberButton = document.querySelector("#negativeNumber");
+negativeNumberButton.addEventListener("click", handleNegativeNumber); // Basic Button Functionality and pressing animation 
 
 var allButtons = document.querySelectorAll(".buttons");
 var allNumbers = document.querySelectorAll(".numbers");
