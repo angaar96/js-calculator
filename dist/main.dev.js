@@ -4,68 +4,40 @@ var screenInput = document.querySelector("#screenInput");
 var screenOutput = document.querySelector("#screenOutput"); // Special Button Functionality - Functions
 
 function calculateAnswer() {
-  console.log(screenInput.innerText);
-  screenInputArray = screenInput.innerText.split(/[n+\-/*]/);
-  console.log(screenInputArray.indexOf(''));
-  screenInput.innerText.match(/[n]/) ? screenInputArray[screenInputArray.indexOf('')] = "n" : console.log("no negative numbers");
-  console.log(screenInputArray);
-  var newNumberArray = screenInputArray.filter(function (i) {
+  screenInputArray = screenInput.innerText.split(/[n+\-/*]/); // The split needs to allow for numbers with more than one digit. Therefore a split is used. As the split changes "n", which represents a negative number, to "", we need to switch it back to "n" in screenInputArray. 
+
+  screenInput.innerText.match(/[n]/) ? screenInputArray[screenInputArray.indexOf('')] = "n" : console.log("no negative numbers"); // Let's remove all the numbers but keep special characters such as the negative number indicator "n". 
+
+  var filteredInputArray = screenInputArray.filter(function (i) {
     return !i.match(/[+\-/*]/);
-  });
-  console.log(newNumberArray);
-  var floatArray = newNumberArray.filter(function (i) {
+  }); // Now lets grab all the numbers. 
+
+  var numberArray = filteredInputArray.filter(function (i) {
     return i.match(/[\d]/);
-  });
-  console.log(floatArray);
-  var floatNumbersOnly = floatArray.map(function (number) {
+  }); // And lets convert them into floats so we can grab any numbers with decimal points. 
+
+  var floatArray = numberArray.map(function (number) {
     return parseFloat(number);
   });
-  console.log(floatNumbersOnly);
-  var whichOperatorData = screenInput.innerText.match(/[+\-/*]/g);
-  console.log(whichOperatorData);
-  var answer = newNumberArray[0] === "n" ? -1 * floatNumbersOnly[0] : floatNumbersOnly[0]; // for 1 * 3
-  // first element is not n so answer = 1 
-  // new numbers array = ["1", "3"]
-  // float array = ["1", "3"]
-  // which operators array = [*]
-  // its a multiply, so it checks next element and its not n, therefore 
+  var operatorArray = screenInput.innerText.match(/[+\-/*]/g);
+  var answer = filteredInputArray[0] === "n" ? -1 * floatArray[0] : floatArray[0];
 
-  for (var i = 0; i <= whichOperatorData.length - 1; i++) {
-    switch (whichOperatorData[i]) {
+  for (var i = 0; i <= operatorArray.length - 1; i++) {
+    switch (operatorArray[i]) {
       case "+":
-        if (newNumberArray[i + 1] == "n") {
-          answer -= floatNumbersOnly[i + 1];
-        } else {
-          answer += floatNumbersOnly[i + 1];
-        }
-
+        filteredInputArray[i + 1] == "n" ? answer -= floatArray[i + 1] : answer += floatArray[i + 1];
         break;
 
       case "-":
-        if (newNumberArray[i + 1] == "n") {
-          answer += floatNumbersOnly[i + 1];
-        } else {
-          answer -= floatNumbersOnly[i + 1];
-        }
-
+        filteredInputArray[i + 1] == "n" ? answer += floatArray[i + 1] : answer -= floatArray[i + 1];
         break;
 
       case "*":
-        if (newNumberArray[i + 1] == "n") {
-          answer *= -1 * floatNumbersOnly[i + 1];
-        } else {
-          answer *= floatNumbersOnly[i + 1];
-        }
-
+        filteredInputArray[i + 1] == "n" ? answer *= -1 * floatArray[i + 1] : answer *= floatArray[i + 1];
         break;
 
       case "/":
-        if (newNumberArray[i + 1] == "n") {
-          answer /= floatNumbersOnly[i + 1] * -1;
-        } else {
-          answer /= floatNumbersOnly[i + 1];
-        }
-
+        filteredInputArray[i + 1] == "n" ? answer /= floatArray[i + 1] * -1 : answer /= floatArray[i + 1];
         break;
     }
   } // If the number is recurring, then round it. 

@@ -123,3 +123,51 @@ describe('Special operators and other functionality', () => {
     cy.get('[data-cy=screenOutput]').should("have.value", '6'); 
   })
 })
+
+describe('Negative number functionality', () => {
+  it('should calculate -2+2 and return 0', () => {
+    cy.visit("http://127.0.0.1:5500/index.html");
+    cy.get('[data-cy=negativeNumber]').click();
+    cy.get('[data-cy=two]').click();
+    cy.get('[data-cy=add]').click();
+    cy.get('[data-cy=two]').click(); 
+    cy.get('[data-cy=equals]').click();
+    // Assert 
+    cy.get('[data-cy=screenOutput]').should("have.value", '0'); 
+  })
+  it('should calculate -1000-500 and return -1500', () => {
+    cy.visit("http://127.0.0.1:5500/index.html");
+    cy.get('[data-cy=negativeNumber]').click();
+    cy.get('[data-cy=one]').click();
+    cy.get('[data-cy=zero]').click();
+    cy.get('[data-cy=zero]').click(); 
+    cy.get('[data-cy=zero]').click();
+    cy.get('[data-cy=subtract]').click();
+    cy.get('[data-cy=five]').click();
+    cy.get('[data-cy=zero]').click();
+    cy.get('[data-cy=zero]').click();
+    cy.get('[data-cy=equals]').click();
+    // Assert 
+    cy.get('[data-cy=screenOutput]').should("have.value", '-1500'); 
+  })
+  it('should calculate 2- -2 and return 4', () => {
+    cy.visit("http://127.0.0.1:5500/index.html");
+    cy.get('[data-cy=two]').click();
+    cy.get('[data-cy=subtract]').click();
+    cy.get('[data-cy=negativeNumber]').click();
+    cy.get('[data-cy=two]').click(); 
+    cy.get('[data-cy=equals]').click();
+    // Assert 
+    cy.get('[data-cy=screenOutput]').should("have.value", '4'); 
+  })
+  it('should calculate 2+ -4 and return -2', () => {
+    cy.visit("http://127.0.0.1:5500/index.html");
+    cy.get('[data-cy=two]').click();
+    cy.get('[data-cy=add]').click();
+    cy.get('[data-cy=negativeNumber]').click();
+    cy.get('[data-cy=four]').click(); 
+    cy.get('[data-cy=equals]').click();
+    // Assert 
+    cy.get('[data-cy=screenOutput]').should("have.value", '-2'); 
+  })
+})

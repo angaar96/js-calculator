@@ -5,59 +5,31 @@ let screenOutput = document.querySelector("#screenOutput");
 // Special Button Functionality - Functions
 
 function calculateAnswer() {
-  console.log(screenInput.innerText);
   screenInputArray = screenInput.innerText.split(/[n+\-/*]/);
-  console.log(screenInputArray.indexOf(''));
+  // The split needs to allow for numbers with more than one digit. Therefore a split is used. As the split changes "n", which represents a negative number, to "", we need to switch it back to "n" in screenInputArray. 
   screenInput.innerText.match(/[n]/) ? screenInputArray[screenInputArray.indexOf('')] = "n" : console.log("no negative numbers");
-  console.log(screenInputArray);
-  let newNumberArray = screenInputArray.filter(i => {return !i.match(/[+\-/*]/)})
-  console.log(newNumberArray); 
-  let floatArray = newNumberArray.filter(i => {
-    return i.match(/[\d]/); 
-  }); 
-  console.log(floatArray);
-  let floatNumbersOnly = floatArray.map(number => parseFloat(number));
-  console.log(floatNumbersOnly)
-  let whichOperatorData = screenInput.innerText.match(/[+\-/*]/g);
-  console.log(whichOperatorData)
-  let answer = newNumberArray[0] === "n" ? (-1*floatNumbersOnly[0]) : floatNumbersOnly[0]; 
+  // Let's remove all the numbers but keep special characters such as the negative number indicator "n". 
+  let filteredInputArray = screenInputArray.filter(i => {return !i.match(/[+\-/*]/)})
+  // Now lets grab all the numbers. 
+  let numberArray = filteredInputArray.filter(i => i.match(/[\d]/));  
+  // And lets convert them into floats so we can grab any numbers with decimal points. 
+  let floatArray = numberArray.map(number => parseFloat(number));
+  let operatorArray = screenInput.innerText.match(/[+\-/*]/g);
+  let answer = filteredInputArray[0] === "n" ? (-1*floatArray[0]) : floatArray[0]; 
 
-  // for 1 * 3
-  // first element is not n so answer = 1 
-  // new numbers array = ["1", "3"]
-  // float array = ["1", "3"]
-  // which operators array = [*]
-  // its a multiply, so it checks next element and its not n, therefore 
-
-  for (let i=0; i <= whichOperatorData.length-1; i++) {
-    switch (whichOperatorData[i]) {
+  for (let i=0; i <= operatorArray.length-1; i++) {
+    switch (operatorArray[i]) {
       case "+":
-        if (newNumberArray[i+1] == "n") {
-          answer -= floatNumbersOnly[i+1]; 
-        } else {
-          answer += floatNumbersOnly[i+1]; 
-        }
+        filteredInputArray[i+1] == "n" ? answer -= floatArray[i+1] : answer += floatArray[i+1]; 
         break; 
       case "-": 
-        if (newNumberArray[i+1] == "n") {
-          answer += floatNumbersOnly[i+1]; 
-        } else {
-          answer -= floatNumbersOnly[i+1]; 
-        }
+        filteredInputArray[i+1] == "n" ? answer += floatArray[i+1] : answer -= floatArray[i+1]; 
         break;
       case "*": 
-      if (newNumberArray[i+1] == "n") {
-        answer *= (-1*floatNumbersOnly[i+1]); 
-      } else {
-        answer *= floatNumbersOnly[i+1]; 
-      }
-      break; 
+        filteredInputArray[i+1] == "n" ? answer *= (-1*floatArray[i+1]) : answer *= floatArray[i+1]; 
+        break; 
       case "/": 
-      if (newNumberArray[i+1] == "n") {
-        answer /= (floatNumbersOnly[i+1]*-1); 
-      } else {
-        answer /= floatNumbersOnly[i+1]; 
-      }
+        filteredInputArray[i+1] == "n" ? answer /= (floatArray[i+1]*-1) : answer /= floatArray[i+1]; 
       break; 
     }
 }
