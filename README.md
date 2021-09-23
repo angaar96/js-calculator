@@ -11,7 +11,7 @@ Responsive on PC and Mobile.
 
 ## Instructions
 
-Use as you would a regular calculator. 
+Use as you would use a regular calculator. 
 
 If you want to use negative numbers, press the "+/-" button before the number you want to be negative. 
 
