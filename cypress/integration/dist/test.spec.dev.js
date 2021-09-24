@@ -163,4 +163,26 @@ describe('Negative number functionality', function () {
 
     cy.get('[data-cy=screenOutput]').should("have.value", '-2');
   });
+  it('should calculate -2 + -2 and return -4', function () {
+    cy.visit("http://127.0.0.1:5500/index.html");
+    cy.get('[data-cy=negativeNumber]').click();
+    cy.get('[data-cy=two]').click();
+    cy.get('[data-cy=add]').click();
+    cy.get('[data-cy=negativeNumber]').click();
+    cy.get('[data-cy=two]').click();
+    cy.get('[data-cy=equals]').click(); // Assert 
+
+    cy.get('[data-cy=screenOutput]').should("have.value", '-4');
+  });
+  it('should calculate -2 - -2 and return 0', function () {
+    cy.visit("http://127.0.0.1:5500/index.html");
+    cy.get('[data-cy=negativeNumber]').click();
+    cy.get('[data-cy=two]').click();
+    cy.get('[data-cy=subtract]').click();
+    cy.get('[data-cy=negativeNumber]').click();
+    cy.get('[data-cy=two]').click();
+    cy.get('[data-cy=equals]').click(); // Assert 
+
+    cy.get('[data-cy=screenOutput]').should("have.value", '0');
+  });
 });

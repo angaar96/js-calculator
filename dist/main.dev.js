@@ -4,40 +4,47 @@ var screenInput = document.querySelector("#screenInput");
 var screenOutput = document.querySelector("#screenOutput"); // Special Button Functionality - Functions
 
 function calculateAnswer() {
-  screenInputArray = screenInput.innerText.split(/[n+\-/*]/); // The split needs to allow for numbers with more than one digit. Therefore a split is used. As the split changes "n", which represents a negative number, to "", we need to switch it back to "n" in screenInputArray. 
+  var screenInputArray = screenInput.innerText.split(/[n+\-/*]/); // The split needs to allow for numbers with more than one digit. Therefore a split is used. 
+  // As the split changes "n", which represents a negative number, to "", we need to switch it back to "n" in screenInputArray using a map loop. 
 
-  screenInput.innerText.match(/[n]/) ? screenInputArray[screenInputArray.indexOf('')] = "n" : console.log("no negative numbers"); // Let's remove all the numbers but keep special characters such as the negative number indicator "n". 
+  var completeScreenInputArray = screenInputArray.map(function (character) {
+    return character == "" ? "n" : character;
+  }); // Let's remove all the operators but keep special characters such as the negative number indicator "n". 
 
-  var filteredInputArray = screenInputArray.filter(function (i) {
+  var filteredInputArray = completeScreenInputArray.filter(function (i) {
     return !i.match(/[+\-/*]/);
-  }); // Now lets grab all the numbers. 
-
-  var numberArray = filteredInputArray.filter(function (i) {
-    return i.match(/[\d]/);
-  }); // And lets convert them into floats so we can grab any numbers with decimal points. 
-
-  var floatArray = numberArray.map(function (number) {
-    return parseFloat(number);
   });
-  var operatorArray = screenInput.innerText.match(/[+\-/*]/g);
-  var answer = filteredInputArray[0] === "n" ? -1 * floatArray[0] : floatArray[0];
+  var floatArray = []; // Now lets grab all the numbers as floats. Use the for loop to make numbers negative based on indicator "n" if they need to be. 
 
-  for (var i = 0; i <= operatorArray.length - 1; i++) {
-    switch (operatorArray[i]) {
+  for (var i = 0; i < filteredInputArray.length; i++) {
+    if (filteredInputArray[i - 1] && filteredInputArray[i - 1] == "n") {
+      floatArray.push(parseFloat(filteredInputArray[i]) * -1);
+    } else if (filteredInputArray[i] !== "n") {
+      floatArray.push(parseFloat(filteredInputArray[i]));
+    }
+  }
+
+  ;
+  console.log(floatArray);
+  var operatorArray = screenInput.innerText.match(/[+\-/*]/g);
+  var answer = floatArray[0];
+
+  for (var _i = 0; _i < floatArray.length; _i++) {
+    switch (operatorArray[_i]) {
       case "+":
-        filteredInputArray[i + 1] == "n" ? answer -= floatArray[i + 1] : answer += floatArray[i + 1];
+        answer += floatArray[_i + 1];
         break;
 
       case "-":
-        filteredInputArray[i + 1] == "n" ? answer += floatArray[i + 1] : answer -= floatArray[i + 1];
+        answer -= floatArray[_i + 1];
         break;
 
       case "*":
-        filteredInputArray[i + 1] == "n" ? answer *= -1 * floatArray[i + 1] : answer *= floatArray[i + 1];
+        answer *= floatArray[_i + 1];
         break;
 
       case "/":
-        filteredInputArray[i + 1] == "n" ? answer /= floatArray[i + 1] * -1 : answer /= floatArray[i + 1];
+        answer /= floatArray[_i + 1];
         break;
     }
   } // If the number is recurring, then round it. 
@@ -55,7 +62,7 @@ function calculateAnswer() {
 function handleEquals(event) {
   screenOutput.innerText = "";
   screenOutput.innerText += "= ".concat(calculateAnswer());
-  screenOutput.value = calculateAnswer().toString();
+  screenOutput.value = calculateAnswer().toString(); // for cypress tests
 }
 
 function handleNegativeNumber() {
