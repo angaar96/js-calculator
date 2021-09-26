@@ -1,11 +1,12 @@
-let screenInput = document.querySelector("#screenInput");
+let screenInputDisplay = document.querySelector("#screenInput");
 let screenOutput = document.querySelector("#screenOutput");
+let screenInput = "";
 
 
 // Special Button Functionality - Functions
 
 function calculateAnswer() {
-  let screenInputArray = screenInput.innerText.split(/[n+\-/*]/);
+  let screenInputArray = screenInput.split(/[n+\-/*]/);
   // The split needs to allow for numbers with more than one digit. Therefore a split is used. 
   // As the split changes "n", which represents a negative number, to "", we need to switch it back to "n" in screenInputArray using a map loop. 
   const completeScreenInputArray = screenInputArray.map(character => {
@@ -22,8 +23,7 @@ function calculateAnswer() {
       floatArray.push(parseFloat(filteredInputArray[i])); 
     }
   };
-  console.log(floatArray);   
-  let operatorArray = screenInput.innerText.match(/[+\-/*]/g);
+  let operatorArray = screenInput.match(/[+\-/*]/g);
   let answer = floatArray[0]; 
 
   for (let i=0; i < floatArray.length; i++) {
@@ -58,28 +58,34 @@ function handleEquals(event) {
 }
 
 function handleNegativeNumber() {
-  screenInput.innerHTML += "n"
+  screenInputDisplay.innerHTML += "(-)";
+  screenInput += "n"
 }
 
 function handleDecimalInput(event) {
-  screenInput.innerHTML += event.target.innerHTML
+  screenInputDisplay.innerHTML += event.target.innerHTML;
+  screenInput += event.target.innerHTML; 
   }
 
 function handleDelete() {
-  screenInput.innerHTML = screenInput.innerText.slice(0, -1);
+  screenInputDisplay.innerHTML = screenInputDisplay.innerText.slice(0, -1);
+  screenInput = screenInput.slice(0, -1);
 }
 
 function handleOperation(event) {
-  screenInput.innerHTML += event.target.innerHTML;
+  screenInputDisplay.innerHTML += event.target.innerHTML;
+  screenInput += event.target.innerHTML;
 }
 
 function handleDivide(event) {
-  screenInput.innerHTML += "/";
+  screenInputDisplay.innerHTML += "÷";
+  screenInput += "/";
 }
 
 function handleAc() {
-  screenInput.innerHTML = ""
+  screenInputDisplay.innerHTML = ""
   screenOutput.innerHTML = ""
+  screenInput = ""; 
 }
 // Special Button Functionality - Event Listeners 
 
@@ -118,7 +124,8 @@ function buttonUnpress(event) {
 
 allNumbers.forEach(number => {
   number.addEventListener("click", (event) => {
-    screenInput.innerHTML += event.target.innerHTML
+    screenInputDisplay.innerHTML += event.target.innerHTML;
+    screenInput += event.target.innerHTML; 
   })
 })
 

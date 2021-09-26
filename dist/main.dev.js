@@ -1,10 +1,11 @@
 "use strict";
 
-var screenInput = document.querySelector("#screenInput");
-var screenOutput = document.querySelector("#screenOutput"); // Special Button Functionality - Functions
+var screenInputDisplay = document.querySelector("#screenInput");
+var screenOutput = document.querySelector("#screenOutput");
+var screenInput = ""; // Special Button Functionality - Functions
 
 function calculateAnswer() {
-  var screenInputArray = screenInput.innerText.split(/[n+\-/*]/); // The split needs to allow for numbers with more than one digit. Therefore a split is used. 
+  var screenInputArray = screenInput.split(/[n+\-/*]/); // The split needs to allow for numbers with more than one digit. Therefore a split is used. 
   // As the split changes "n", which represents a negative number, to "", we need to switch it back to "n" in screenInputArray using a map loop. 
 
   var completeScreenInputArray = screenInputArray.map(function (character) {
@@ -25,8 +26,7 @@ function calculateAnswer() {
   }
 
   ;
-  console.log(floatArray);
-  var operatorArray = screenInput.innerText.match(/[+\-/*]/g);
+  var operatorArray = screenInput.match(/[+\-/*]/g);
   var answer = floatArray[0];
 
   for (var _i = 0; _i < floatArray.length; _i++) {
@@ -66,28 +66,34 @@ function handleEquals(event) {
 }
 
 function handleNegativeNumber() {
-  screenInput.innerHTML += "n";
+  screenInputDisplay.innerHTML += "(-)";
+  screenInput += "n";
 }
 
 function handleDecimalInput(event) {
-  screenInput.innerHTML += event.target.innerHTML;
+  screenInputDisplay.innerHTML += event.target.innerHTML;
+  screenInput += event.target.innerHTML;
 }
 
 function handleDelete() {
-  screenInput.innerHTML = screenInput.innerText.slice(0, -1);
+  screenInputDisplay.innerHTML = screenInputDisplay.innerText.slice(0, -1);
+  screenInput = screenInput.slice(0, -1);
 }
 
 function handleOperation(event) {
-  screenInput.innerHTML += event.target.innerHTML;
+  screenInputDisplay.innerHTML += event.target.innerHTML;
+  screenInput += event.target.innerHTML;
 }
 
 function handleDivide(event) {
-  screenInput.innerHTML += "/";
+  screenInputDisplay.innerHTML += "÷";
+  screenInput += "/";
 }
 
 function handleAc() {
-  screenInput.innerHTML = "";
+  screenInputDisplay.innerHTML = "";
   screenOutput.innerHTML = "";
+  screenInput = "";
 } // Special Button Functionality - Event Listeners 
 
 
@@ -123,7 +129,8 @@ function buttonUnpress(event) {
 
 allNumbers.forEach(function (number) {
   number.addEventListener("click", function (event) {
-    screenInput.innerHTML += event.target.innerHTML;
+    screenInputDisplay.innerHTML += event.target.innerHTML;
+    screenInput += event.target.innerHTML;
   });
 });
 allButtons.forEach(function (button) {
