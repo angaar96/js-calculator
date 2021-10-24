@@ -74,21 +74,9 @@ var handleInput = function handleInput(e) {
       screenInput += "n";
       break;
 
-    case ".":
-      screenInputDisplay.innerHTML += e.target.innerHTML;
-      screenInput += e.target.innerHTML;
-      break;
-
     case "DEL":
       screenInputDisplay.innerHTML = screenInputDisplay.innerText.slice(0, -1);
       screenInput = screenInput.slice(0, -1);
-      break;
-
-    case "+":
-    case "-":
-    case "*":
-      screenInputDisplay.innerHTML += e.target.innerHTML;
-      screenInput += e.target.innerHTML;
       break;
 
     case "÷":
@@ -112,6 +100,10 @@ var handleInput = function handleInput(e) {
     case "7":
     case "8":
     case "9":
+    case ".":
+    case "+":
+    case "-":
+    case "*":
       screenInputDisplay.innerHTML += e.target.innerHTML;
       screenInput += e.target.innerHTML;
       break;

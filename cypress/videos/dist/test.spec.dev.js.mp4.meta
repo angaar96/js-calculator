@@ -1,0 +1,76 @@
+;FFMETADATA1
+[CHAPTER]
+TIMEBASE=1/1000
+START=3960
+END=4043
+title=My First Test Does not do much!
+[CHAPTER]
+TIMEBASE=1/1000
+START=5157
+END=5860
+title=Basic operations should calculate 1 + 1 and return 2
+[CHAPTER]
+TIMEBASE=1/1000
+START=5805
+END=6566
+title=Basic operations should calculate 250-50 and returns 200
+[CHAPTER]
+TIMEBASE=1/1000
+START=6766
+END=7329
+title=Basic operations should calculate 50 ÷ 5 and return 10
+[CHAPTER]
+TIMEBASE=1/1000
+START=7406
+END=7894
+title=Basic operations should calculate 8 * 5 and return 40
+[CHAPTER]
+TIMEBASE=1/1000
+START=7315
+END=8385
+title=Special operators and other functionality should calculate 18.5-10.2 and return 8.3
+[CHAPTER]
+TIMEBASE=1/1000
+START=8439
+END=9457
+title=Special operators and other functionality should erase the screen when the AC button is pressed
+[CHAPTER]
+TIMEBASE=1/1000
+START=9742
+END=10476
+title=Special operators and other functionality should delete a single character when the delete button is pressed, changing calculation from 18-10 to 18-1 and therefore should return 17
+[CHAPTER]
+TIMEBASE=1/1000
+START=10315
+END=11211
+title=Special operators and other functionality should calculate 18-7+1/2 and return 6 by correctly chaining operators
+[CHAPTER]
+TIMEBASE=1/1000
+START=11562
+END=12109
+title=Negative number functionality should calculate -2+2 and return 0
+[CHAPTER]
+TIMEBASE=1/1000
+START=11685
+END=12657
+title=Negative number functionality should calculate -1000-500 and return -1500
+[CHAPTER]
+TIMEBASE=1/1000
+START=13113
+END=13632
+title=Negative number functionality should calculate 2- -2 and return 4
+[CHAPTER]
+TIMEBASE=1/1000
+START=13617
+END=14152
+title=Negative number functionality should calculate 2+ -4 and return -2
+[CHAPTER]
+TIMEBASE=1/1000
+START=14080
+END=14688
+title=Negative number functionality should calculate -2 + -2 and return -4
+[CHAPTER]
+TIMEBASE=1/1000
+START=14686
+END=15297
+title=Negative number functionality should calculate -2 - -2 and return 0

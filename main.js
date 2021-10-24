@@ -63,17 +63,9 @@ const handleInput = (e) => {
       screenInputDisplay.innerHTML += "(-)";
       screenInput += "n";
       break;
-    case ".":
-      screenInputDisplay.innerHTML += e.target.innerHTML;
-      screenInput += e.target.innerHTML;
-      break;
     case "DEL":
       screenInputDisplay.innerHTML = screenInputDisplay.innerText.slice(0, -1);
       screenInput = screenInput.slice(0, -1);
-      break;
-    case "+": case "-": case "*":
-      screenInputDisplay.innerHTML += e.target.innerHTML;
-      screenInput += e.target.innerHTML;
       break;
     case "÷": 
       screenInputDisplay.innerHTML += "÷";
@@ -84,16 +76,9 @@ const handleInput = (e) => {
       screenOutput.innerHTML = ""
       screenInput = ""; 
       break;
-    case "0":
-    case "1": 
-    case "2": 
-    case "3": 
-    case "4": 
-    case "5": 
-    case "6": 
-    case "7": 
-    case "8":
-    case "9":
+    case "0": case "1": case "2": case "3": case "4": case "5": 
+    case "6": case "7": case "8": case "9":
+    case ".": case "+": case "-": case "*":
       screenInputDisplay.innerHTML += e.target.innerHTML;
       screenInput += e.target.innerHTML;
       break;    
