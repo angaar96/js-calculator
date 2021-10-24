@@ -1,10 +1,11 @@
 "use strict";
 
+var allButtons = document.querySelectorAll(".buttons");
 var screenInputDisplay = document.querySelector("#screenInput");
 var screenOutput = document.querySelector("#screenOutput");
 var screenInput = ""; // Special Button Functionality - Functions
 
-function calculateAnswer() {
+var calculateAnswer = function calculateAnswer() {
   var screenInputArray = screenInput.split(/[n+\-/*]/); // The split needs to allow for numbers with more than one digit. Therefore a split is used. 
   // As the split changes "n", which represents a negative number, to "", we need to switch it back to "n" in screenInputArray using a map loop. 
 
@@ -57,83 +58,73 @@ function calculateAnswer() {
   } else {
     return answer;
   }
-}
+};
 
-function handleEquals(event) {
-  screenOutput.innerText = "";
-  screenOutput.innerText += "= ".concat(calculateAnswer());
-  screenOutput.value = calculateAnswer().toString(); // for cypress tests
-}
+var handleInput = function handleInput(e) {
+  switch (e.target.innerHTML) {
+    case "=":
+      screenOutput.innerText = "";
+      screenOutput.innerText += "= ".concat(calculateAnswer());
+      screenOutput.value = calculateAnswer().toString(); // for cypress tests
 
-function handleNegativeNumber() {
-  screenInputDisplay.innerHTML += "(-)";
-  screenInput += "n";
-}
+      break;
 
-function handleDecimalInput(event) {
-  screenInputDisplay.innerHTML += event.target.innerHTML;
-  screenInput += event.target.innerHTML;
-}
+    case "+/-":
+      screenInputDisplay.innerHTML += "(-)";
+      screenInput += "n";
+      break;
 
-function handleDelete() {
-  screenInputDisplay.innerHTML = screenInputDisplay.innerText.slice(0, -1);
-  screenInput = screenInput.slice(0, -1);
-}
+    case ".":
+      screenInputDisplay.innerHTML += e.target.innerHTML;
+      screenInput += e.target.innerHTML;
+      break;
 
-function handleOperation(event) {
-  screenInputDisplay.innerHTML += event.target.innerHTML;
-  screenInput += event.target.innerHTML;
-}
+    case "DEL":
+      screenInputDisplay.innerHTML = screenInputDisplay.innerText.slice(0, -1);
+      screenInput = screenInput.slice(0, -1);
+      break;
 
-function handleDivide(event) {
-  screenInputDisplay.innerHTML += "÷";
-  screenInput += "/";
-}
+    case "+":
+    case "-":
+    case "*":
+      screenInputDisplay.innerHTML += e.target.innerHTML;
+      screenInput += e.target.innerHTML;
+      break;
 
-function handleAc() {
-  screenInputDisplay.innerHTML = "";
-  screenOutput.innerHTML = "";
-  screenInput = "";
-} // Special Button Functionality - Event Listeners 
+    case "÷":
+      screenInputDisplay.innerHTML += "÷";
+      screenInput += "/";
+      break;
+
+    case "AC":
+      screenInputDisplay.innerHTML = "";
+      screenOutput.innerHTML = "";
+      screenInput = "";
+      break;
+
+    case "0":
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+      screenInputDisplay.innerHTML += e.target.innerHTML;
+      screenInput += e.target.innerHTML;
+      break;
+  }
+}; // Wire up buttons to handleInput function and pressing animation. 
 
 
-var acButton = document.querySelector("#ac");
-acButton.addEventListener("click", handleAc);
-var decimalButton = document.querySelector("#decimalPoint");
-decimalButton.addEventListener("click", handleDecimalInput);
-var equalsButton = document.querySelector("#equals");
-equalsButton.addEventListener("click", handleEquals);
-var deleteButton = document.querySelector("#delete");
-deleteButton.addEventListener("click", handleDelete);
-var addButton = document.querySelector("#add");
-addButton.addEventListener("click", handleOperation);
-var subtractButton = document.querySelector("#subtract");
-subtractButton.addEventListener("click", handleOperation);
-var divideButton = document.querySelector("#divide");
-divideButton.addEventListener("click", handleDivide);
-var multiplyButton = document.querySelector("#multiply");
-multiplyButton.addEventListener("click", handleOperation);
-var negativeNumberButton = document.querySelector("#negativeNumber");
-negativeNumberButton.addEventListener("click", handleNegativeNumber); // Basic Button Functionality and pressing animation 
-
-var allButtons = document.querySelectorAll(".buttons");
-var allNumbers = document.querySelectorAll(".numbers");
-
-function buttonPress(event) {
-  event.target.classList.add("pressed");
-}
-
-function buttonUnpress(event) {
-  event.target.classList.remove("pressed");
-}
-
-allNumbers.forEach(function (number) {
-  number.addEventListener("click", function (event) {
-    screenInputDisplay.innerHTML += event.target.innerHTML;
-    screenInput += event.target.innerHTML;
-  });
-});
 allButtons.forEach(function (button) {
-  button.addEventListener("mousedown", buttonPress);
-  button.addEventListener("mouseup", buttonUnpress);
+  button.addEventListener("click", handleInput);
+  button.addEventListener("mousedown", function (e) {
+    return e.target.classList.add("pressed");
+  });
+  button.addEventListener("mouseup", function (e) {
+    return e.target.classList.remove("pressed");
+  });
 });

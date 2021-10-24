@@ -1,3 +1,4 @@
+let allButtons = document.querySelectorAll(".buttons");
 let screenInputDisplay = document.querySelector("#screenInput");
 let screenOutput = document.querySelector("#screenOutput");
 let screenInput = "";
@@ -5,7 +6,7 @@ let screenInput = "";
 
 // Special Button Functionality - Functions
 
-function calculateAnswer() {
+const calculateAnswer = () => {
   let screenInputArray = screenInput.split(/[n+\-/*]/);
   // The split needs to allow for numbers with more than one digit. Therefore a split is used. 
   // As the split changes "n", which represents a negative number, to "", we need to switch it back to "n" in screenInputArray using a map loop. 
@@ -51,85 +52,58 @@ function calculateAnswer() {
   }
 } 
 
-function handleEquals(event) {
-  screenOutput.innerText = ""; 
-  screenOutput.innerText += `= ${calculateAnswer()}`;
-  screenOutput.value = calculateAnswer().toString(); // for cypress tests
-}
-
-function handleNegativeNumber() {
-  screenInputDisplay.innerHTML += "(-)";
-  screenInput += "n"
-}
-
-function handleDecimalInput(event) {
-  screenInputDisplay.innerHTML += event.target.innerHTML;
-  screenInput += event.target.innerHTML; 
+const handleInput = (e) => {
+  switch(e.target.innerHTML) {
+    case "=":
+      screenOutput.innerText = ""; 
+      screenOutput.innerText += `= ${calculateAnswer()}`;
+      screenOutput.value = calculateAnswer().toString(); // for cypress tests
+      break;
+    case "+/-":
+      screenInputDisplay.innerHTML += "(-)";
+      screenInput += "n";
+      break;
+    case ".":
+      screenInputDisplay.innerHTML += e.target.innerHTML;
+      screenInput += e.target.innerHTML;
+      break;
+    case "DEL":
+      screenInputDisplay.innerHTML = screenInputDisplay.innerText.slice(0, -1);
+      screenInput = screenInput.slice(0, -1);
+      break;
+    case "+": case "-": case "*":
+      screenInputDisplay.innerHTML += e.target.innerHTML;
+      screenInput += e.target.innerHTML;
+      break;
+    case "÷": 
+      screenInputDisplay.innerHTML += "÷";
+      screenInput += "/"; 
+      break;
+    case "AC":
+      screenInputDisplay.innerHTML = ""
+      screenOutput.innerHTML = ""
+      screenInput = ""; 
+      break;
+    case "0":
+    case "1": 
+    case "2": 
+    case "3": 
+    case "4": 
+    case "5": 
+    case "6": 
+    case "7": 
+    case "8":
+    case "9":
+      screenInputDisplay.innerHTML += e.target.innerHTML;
+      screenInput += e.target.innerHTML;
+      break;    
   }
-
-function handleDelete() {
-  screenInputDisplay.innerHTML = screenInputDisplay.innerText.slice(0, -1);
-  screenInput = screenInput.slice(0, -1);
 }
 
-function handleOperation(event) {
-  screenInputDisplay.innerHTML += event.target.innerHTML;
-  screenInput += event.target.innerHTML;
-}
-
-function handleDivide(event) {
-  screenInputDisplay.innerHTML += "÷";
-  screenInput += "/";
-}
-
-function handleAc() {
-  screenInputDisplay.innerHTML = ""
-  screenOutput.innerHTML = ""
-  screenInput = ""; 
-}
-// Special Button Functionality - Event Listeners 
-
-let acButton = document.querySelector("#ac");
-acButton.addEventListener("click", handleAc); 
-let decimalButton = document.querySelector("#decimalPoint"); 
-decimalButton.addEventListener("click", handleDecimalInput);
-let equalsButton = document.querySelector("#equals"); 
-equalsButton.addEventListener("click", handleEquals);
-let deleteButton = document.querySelector("#delete");
-deleteButton.addEventListener("click", handleDelete);
-let addButton = document.querySelector("#add");
-addButton.addEventListener("click", handleOperation);
-let subtractButton = document.querySelector("#subtract");
-subtractButton.addEventListener("click", handleOperation);
-let divideButton = document.querySelector("#divide");
-divideButton.addEventListener("click", handleDivide);
-let multiplyButton = document.querySelector("#multiply");
-multiplyButton.addEventListener("click", handleOperation);
-let negativeNumberButton = document.querySelector("#negativeNumber");
-negativeNumberButton.addEventListener("click", handleNegativeNumber); 
-
-
-
-// Basic Button Functionality and pressing animation 
-
-let allButtons = document.querySelectorAll(".buttons");
-let allNumbers = document.querySelectorAll(".numbers")
-
-function buttonPress(event) {
-  event.target.classList.add("pressed")
-  }
-function buttonUnpress(event) {
-  event.target.classList.remove("pressed")
-}
-
-allNumbers.forEach(number => {
-  number.addEventListener("click", (event) => {
-    screenInputDisplay.innerHTML += event.target.innerHTML;
-    screenInput += event.target.innerHTML; 
-  })
-})
+// Wire up buttons to handleInput function and pressing animation. 
 
 allButtons.forEach(button => {
-  button.addEventListener("mousedown", buttonPress)
-  button.addEventListener("mouseup", buttonUnpress)
+  button.addEventListener("click", handleInput)
+  button.addEventListener("mousedown", (e) => e.target.classList.add("pressed"));
+  button.addEventListener("mouseup", (e) => e.target.classList.remove("pressed")); 
 })
